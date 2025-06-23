@@ -5,7 +5,10 @@ import {
   DataType,
   PrimaryKey,
   AutoIncrement,
+  HasMany,
+  Unique,
 } from "sequelize-typescript";
+import { Decision } from "./decision.model";
 
 @Table({ tableName: "assets" })
 export class Asset extends Model {
@@ -14,12 +17,12 @@ export class Asset extends Model {
   @Column(DataType.INTEGER)
   id!: number;
 
-  @Column({
-    type: DataType.STRING(20),
-    allowNull: false,
-    unique: true,
-  })
+  @Unique
+  @Column(DataType.STRING(20))
   symbol!: string;
+
+  @HasMany(() => Decision)
+  decisions!: Decision[];
 
   @Column({
     type: DataType.DECIMAL(20, 8),

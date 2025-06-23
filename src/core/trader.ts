@@ -70,13 +70,15 @@ export class Trader {
   /**
    * Запускает торгового бота
    */
-  start() {
+  async start() {
+    logger.info("Запуск первого торгового цикла вручную...");
+    await this.tradeCycle();
+
     this.scheduler.registerIntervalTask("trade-cycle", this.tradeInterval, () =>
       this.tradeCycle()
     );
     logger.info("Торговый бот запущен");
   }
-
   /**
    * Останавливает торгового бота
    */

@@ -19,13 +19,10 @@ export class Decision extends Model {
   id!: number;
 
   @ForeignKey(() => Asset)
-  @Column({
-    type: DataType.STRING(20),
-    allowNull: false,
-  })
-  assetSymbol!: string;
+  @Column(DataType.INTEGER) // ТОЧНО INTEGER!
+  asset_id!: number;
 
-  @BelongsTo(() => Asset, "assetSymbol")
+  @BelongsTo(() => Asset)
   asset!: Asset;
 
   @Column({
